@@ -1,0 +1,46 @@
+using System;
+
+public class NhanVienBienChe : NhanVien, ILuong
+{
+    public float HeSoLuong { get; set; }
+    public float LuongCoBan { get; set; }
+
+    public NhanVienBienChe() {}
+
+    public NhanVienBienChe(string maNV, string hoTen, string soCMND, DateTime ngayVaoLam, float heSoLuong, float luongCoBan)
+        : base(maNV, hoTen, soCMND, ngayVaoLam)
+    {
+        HeSoLuong = heSoLuong;
+        LuongCoBan = luongCoBan;
+    }
+
+    public override void Nhap()
+    {
+        base.Nhap();
+        Console.Write("Nhập hệ số lương: ");
+        HeSoLuong = float.Parse(Console.ReadLine());
+        Console.Write("Nhập lương cơ bản: ");
+        LuongCoBan = float.Parse(Console.ReadLine());
+    }
+
+    public override void Xuat()
+    {
+        base.Xuat();
+        Console.WriteLine($"Hệ số lương: {HeSoLuong}, Lương cơ bản: {LuongCoBan}");
+    }
+
+    public override int TinhThamNien()
+    {
+        return DateTime.Today.Year - NgayVaoLam.Year;
+    }
+
+    public double TinhPhuCap()
+    {
+        return LuongCoBan / 10;
+    }
+
+    public double ThucLinh()
+    {
+        return HeSoLuong * LuongCoBan + TinhPhuCap();
+    }
+}
