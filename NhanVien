@@ -36,6 +36,6 @@ namespace QuanLyNhanVien
             Console.WriteLine($"Mã NV: {MaNV}, Họ Tên: {HoTen}, Số CMND: {SoCMND}, Ngày vào làm: {NgayVaoLam.ToShortDateString()}");
         }
 
-        public abstract int TinhThamNien();  // Phương thức trừu tượng tính thâm niên
+        public abstract int TinhThamNien();  
     }
 }
