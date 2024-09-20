@@ -1,0 +1,10 @@
+class Program
+{
+    static void Main(string[] args)
+    {
+        QuanLyNhanVien qlNhanVien = new QuanLyNhanVien();
+        qlNhanVien.ThucHien();
+        qlNhanVien.TongQuyLuong();
+        qlNhanVien.TinhTienThuong();
+    }
+}
