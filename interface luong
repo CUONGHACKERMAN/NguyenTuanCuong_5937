@@ -1,0 +1,10 @@
+using System;
+
+namespace QuanLyNhanVien
+{
+    public interface ILuong
+    {
+        double TinhPhuCap();  // Tính phụ cấp
+        double ThucLinh();    // Tính lương thực lĩnh
+    }
+}
