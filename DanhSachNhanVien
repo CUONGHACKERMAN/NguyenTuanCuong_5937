@@ -1,0 +1,114 @@
+using System;
+using System.Collections.Generic;
+
+namespace QuanLyNhanVien
+{
+    public class DanhSachNhanVien
+    {
+        private Dictionary<string, NhanVien> dsNhanVien = new Dictionary<string, NhanVien>();
+
+        public void Nhap()
+        {
+            while (true)
+            {
+                Console.WriteLine("Nhập (B) để nhập nhân viên biên chế, (H) để nhập nhân viên hợp đồng, hoặc 0 để thoát: ");
+                string loaiNV = Console.ReadLine();
+                if (loaiNV == "0") break;
+
+                try
+                {
+                    NhanVien nv = null;
+                    if (loaiNV.ToUpper() == "B")
+                    {
+                        nv = new NhanVienBienChe();
+                    }
+                    else if (loaiNV.ToUpper() == "H")
+                    {
+                        nv = new NhanVienHopDong();
+                    }
+
+                    nv.Nhap();
+
+                    if (dsNhanVien.ContainsKey(nv.MaNV))
+                    {
+                        throw new Exception("Mã nhân viên đã tồn tại.");
+                    }
+
+                    dsNhanVien.Add(nv.MaNV, nv);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Lỗi: " + ex.Message);
+                }
+            }
+        }
+
+        public void Xuat()
+        {
+            foreach (var nv in dsNhanVien.Values)
+            {
+                nv.Xuat();
+            }
+        }
+
+        public double TongQuyLuong()
+        {
+            double tongLuong = 0;
+            foreach (var nv in dsNhanVien.Values)
+            {
+                ILuong iLuong = nv as ILuong;
+                if (iLuong != null)
+                {
+                    tongLuong += iLuong.ThucLinh();
+                }
+            }
+            return tongLuong;
+        }
+
+        public void TimNVmayman(string maSo)
+        {
+            if (dsNhanVien.ContainsKey(maSo))
+            {
+                var nv = dsNhanVien[maSo];
+                nv.Xuat();
+
+                double tienThuong = TinhTienThuong(nv);
+                Console.WriteLine($"Tiền thưởng cuối năm: {tienThuong}");
+            }
+            else
+            {
+                Console.WriteLine("Không tìm thấy nhân viên có mã này.");
+            }
+        }
+
+        private double TinhTienThuong(NhanVien nv)
+        {
+            int thamNien = nv.TinhThamNien();
+            if (nv is NhanVienHopDong)
+            {
+                if (thamNien > 10) return 2000000;
+                if (thamNien > 5) return 1000000;
+                return 200000;
+            }
+            if (nv is NhanVienBienChe)
+            {
+                if (thamNien < 3) return 1000000;
+                return 200000;
+            }
+            return 0;
+        }
+
+        public void LocDanhSach()
+        {
+            Console.WriteLine("Danh sách nhân viên có thực lĩnh dưới 9.000.000:");
+            foreach (var nv in dsNhanVien.Values)
+            {
+                ILuong iLuong = nv as ILuong;
+                if (iLuong != null && iLuong.ThucLinh() < 9000000)
+                {
+                    nv.Xuat();
+                }
+            }
+        }
+    }
+}
