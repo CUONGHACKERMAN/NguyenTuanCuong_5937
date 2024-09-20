@@ -1,0 +1,28 @@
+using System;
+
+namespace QuanLyNhanVien
+{
+    public class QuanLyNhanVien
+    {
+        private DanhSachNhanVien dsNhanVien = new DanhSachNhanVien();
+
+        public void ThucHien()
+        {
+            dsNhanVien.Nhap();
+            dsNhanVien.Xuat();
+        }
+
+        public void TongQuyLuong()
+        {
+            double tongLuong = dsNhanVien.TongQuyLuong();
+            Console.WriteLine($"Tổng quỹ lương: {tongLuong}");
+        }
+
+        public void TinhTienThuong()
+        {
+            Console.Write("Nhập mã số nhân viên cần tìm: ");
+            string maSo = Console.ReadLine();
+            dsNhanVien.TimNVmayman(maSo);
+        }
+    }
+}
