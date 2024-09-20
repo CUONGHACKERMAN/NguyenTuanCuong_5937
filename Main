@@ -1,10 +1,16 @@
-class Program
+using System;
+
+namespace QuanLyNhanVien
 {
-    static void Main(string[] args)
+    class Program
     {
-        QuanLyNhanVien qlNhanVien = new QuanLyNhanVien();
-        qlNhanVien.ThucHien();
-        qlNhanVien.TongQuyLuong();
-        qlNhanVien.TinhTienThuong();
+        static void Main(string[] args)
+        {
+            QuanLyNhanVien qlNhanVien = new QuanLyNhanVien();
+            
+            qlNhanVien.ThucHien();  
+            qlNhanVien.TongQuyLuong();  
+            qlNhanVien.TinhTienThuong();  
+        }
     }
 }
