@@ -1,42 +1,45 @@
 using System;
 
-public class NhanVienHopDong : NhanVien, ILuong
+namespace QuanLyNhanVien
 {
-    public double MucLuong { get; set; }
-
-    public NhanVienHopDong() {}
-
-    public NhanVienHopDong(string maNV, string hoTen, string soCMND, DateTime ngayVaoLam, double mucLuong)
-        : base(maNV, hoTen, soCMND, ngayVaoLam)
+    public class NhanVienHopDong : NhanVien, ILuong
     {
-        MucLuong = mucLuong;
-    }
+        public double MucLuong { get; set; }
 
-    public override void Nhap()
-    {
-        base.Nhap();
-        Console.Write("Nhập mức lương: ");
-        MucLuong = double.Parse(Console.ReadLine());
-    }
+        public NhanVienHopDong() {}
 
-    public override void Xuat()
-    {
-        base.Xuat();
-        Console.WriteLine($"Mức lương: {MucLuong}");
-    }
+        public NhanVienHopDong(string maNV, string hoTen, string soCMND, DateTime ngayVaoLam, double mucLuong)
+            : base(maNV, hoTen, soCMND, ngayVaoLam)
+        {
+            MucLuong = mucLuong;
+        }
 
-    public override int TinhThamNien()
-    {
-        return DateTime.Today.Year - NgayVaoLam.Year + 1;
-    }
+        public override void Nhap()
+        {
+            base.Nhap();
+            Console.Write("Nhập mức lương: ");
+            MucLuong = double.Parse(Console.ReadLine());
+        }
 
-    public double TinhPhuCap()
-    {
-        return MucLuong / 10;
-    }
+        public override void Xuat()
+        {
+            base.Xuat();
+            Console.WriteLine($"Mức lương: {MucLuong}");
+        }
 
-    public double ThucLinh()
-    {
-        return MucLuong + TinhPhuCap();
+        public override int TinhThamNien()
+        {
+            return DateTime.Today.Year - NgayVaoLam.Year + 1;
+        }
+
+        public double TinhPhuCap()
+        {
+            return MucLuong / 10;
+        }
+
+        public double ThucLinh()
+        {
+            return MucLuong + TinhPhuCap();
+        }
     }
 }
