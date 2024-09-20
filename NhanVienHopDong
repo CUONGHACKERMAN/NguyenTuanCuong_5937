@@ -1,0 +1,42 @@
+using System;
+
+public class NhanVienHopDong : NhanVien, ILuong
+{
+    public double MucLuong { get; set; }
+
+    public NhanVienHopDong() {}
+
+    public NhanVienHopDong(string maNV, string hoTen, string soCMND, DateTime ngayVaoLam, double mucLuong)
+        : base(maNV, hoTen, soCMND, ngayVaoLam)
+    {
+        MucLuong = mucLuong;
+    }
+
+    public override void Nhap()
+    {
+        base.Nhap();
+        Console.Write("Nhập mức lương: ");
+        MucLuong = double.Parse(Console.ReadLine());
+    }
+
+    public override void Xuat()
+    {
+        base.Xuat();
+        Console.WriteLine($"Mức lương: {MucLuong}");
+    }
+
+    public override int TinhThamNien()
+    {
+        return DateTime.Today.Year - NgayVaoLam.Year + 1;
+    }
+
+    public double TinhPhuCap()
+    {
+        return MucLuong / 10;
+    }
+
+    public double ThucLinh()
+    {
+        return MucLuong + TinhPhuCap();
+    }
+}
