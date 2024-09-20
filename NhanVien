@@ -1,0 +1,38 @@
+using System;
+
+public abstract class NhanVien
+{
+    public string MaNV { get; set; }
+    public string HoTen { get; set; }
+    public string SoCMND { get; set; }
+    public DateTime NgayVaoLam { get; set; }
+
+    public NhanVien() {}
+
+    public NhanVien(string maNV, string hoTen, string soCMND, DateTime ngayVaoLam)
+    {
+        MaNV = maNV;
+        HoTen = hoTen;
+        SoCMND = soCMND;
+        NgayVaoLam = ngayVaoLam;
+    }
+
+    public virtual void Nhap()
+    {
+        Console.Write("Nhập mã nhân viên: ");
+        MaNV = Console.ReadLine();
+        Console.Write("Nhập họ tên: ");
+        HoTen = Console.ReadLine();
+        Console.Write("Nhập số chứng minh nhân dân: ");
+        SoCMND = Console.ReadLine();
+        Console.Write("Nhập ngày vào làm (yyyy-mm-dd): ");
+        NgayVaoLam = DateTime.Parse(Console.ReadLine());
+    }
+
+    public virtual void Xuat()
+    {
+        Console.WriteLine($"Mã NV: {MaNV}, Họ Tên: {HoTen}, Số CMND: {SoCMND}, Ngày vào làm: {NgayVaoLam.ToShortDateString()}");
+    }
+
+    public abstract int TinhThamNien();
+}
